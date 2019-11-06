@@ -1,0 +1,14 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "sawgger API模板",
+    "version" : "v1",
+    "title" : "springboot-swagger API文档"
+  },
+  "basePath" : "/",
+  "tags" : [ {
+    "name" : "user",
+    "description" : "用户管理"
+  } ],
+  "schemes" : [ "http", "https" ]
+}

@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.3.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.sucl</groupId>
+    <artifactId>springboot-swagger</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>springboot-swagger</name>
+    <description>Demo project for Spring Boot</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!--swagger-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.swagger</groupId>
+                    <artifactId>swagger-annotations</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.swagger</groupId>
+                    <artifactId>swagger-models</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>1.5.21</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-models</artifactId>
+            <version>1.5.21</version>
+        </dependency>
+
+        <!-- 方法1需要的 -->
+        <!--<dependency>-->
+            <!--<groupId>io.github.swagger2markup</groupId>-->
+            <!--<artifactId>swagger2markup-maven-plugin</artifactId>-->
+            <!--<version>1.3.3</version>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.asciidoctor</groupId>-->
+            <!--<artifactId>asciidoctorj</artifactId>-->
+            <!--<version>1.5.4.1</version>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <swagger.version>2.9.2</swagger.version>
+        <swagger2markup.version>1.3.1</swagger2markup.version>
+        <!-- 基目录 -->
+        <swagger.base.path>${project.basedir}/docs</swagger.base.path>
+        <!-- 生成swagger.json -->
+        <swagger.input.file>${swagger.base.path}/swagger.json</swagger.input.file>
+        <asciidoctor.output.directory>${swagger.base.path}/snippets</asciidoctor.output.directory>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <!-- 生成swagger.json -->
+            <plugin>
+                <groupId>com.github.kongchen</groupId>
+                <artifactId>swagger-maven-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <apiSources>
+                        <apiSource>
+                            <springmvc>true</springmvc>
+                            <locations>com.sucl.swagger.web</locations>
+                            <schemes>http,https</schemes>
+                            <!--<host>localhost:8080</host>-->
+                            <basePath>/</basePath>
+                            <!-- application.properties中定义的无效 -->
+                            <info>
+                                <title>${project.artifactId} API文档</title>
+                                <version>v1</version>
+                                <description>sawgger API模板</description>
+                            </info>
+                            <!-- 模板位置，支持classpath:类型路径 -->
+                            <!--<templatePath>${swagger.base.path}/template/strapdown.html.hbs</templatePath>-->
+                            <!-- 编译期扫描controller之后合成的API文档输出位置 -->
+                            <!--<outputPath>${swagger.base.path}/generated/document.html</outputPath>-->
+                            <!-- swagger.json生成路径 -->
+                            <swaggerDirectory>${swagger.base.path}</swaggerDirectory>
+                            <!--<attachSwaggerArtifact>true</attachSwaggerArtifact>-->
+                            <outputFormats>json</outputFormats>
+                        </apiSource>
+                    </apiSources>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.commons</groupId>
+                        <artifactId>commons-lang3</artifactId>
+                        <version>3.8.1</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <!-- 编辑阶段执行命令 -->
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- 生成 *.adoc -->
+            <plugin>
+                <groupId>io.github.swagger2markup</groupId>
+                <artifactId>swagger2markup-maven-plugin</artifactId>
+                <version>${swagger2markup.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>io.github.swagger2markup</groupId>
+                        <artifactId>swagger2markup-import-files-ext</artifactId>
+                        <version>${swagger2markup.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>io.github.swagger2markup</groupId>
+                        <artifactId>swagger2markup-spring-restdocs-ext</artifactId>
+                        <version>${swagger2markup.version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <!-- swagger.json位置 -->
+                    <swaggerInput>${swagger.input.file}</swaggerInput>
+                    <!-- 片段生成路径 -->
+                    <outputDir>${asciidoctor.output.directory}</outputDir>
+                    <config>
+                        <swagger2markup.markupLanguage>ASCIIDOC</swagger2markup.markupLanguage>
+                        <swagger2markup.pathsGroupedBy>TAGS</swagger2markup.pathsGroupedBy>
+
+                        <!--<swagger2markup.extensions.dynamicOverview.contentPath>${asciidoctor.output.directory}</swagger2markup.extensions.dynamicOverview.contentPath>-->
+                        <!--<swagger2markup.extensions.dynamicDefinitions.contentPath>${asciidoctor.output.directory}</swagger2markup.extensions.dynamicDefinitions.contentPath>-->
+                        <!--<swagger2markup.extensions.dynamicPaths.contentPath>${asciidoctor.output.directory}</swagger2markup.extensions.dynamicPaths.contentPath>-->
+                        <!--<swagger2markup.extensions.dynamicSecurity.contentPath>${asciidoctor.output.directory}</swagger2markup.extensions.dynamicSecurity.contentPath>-->
+                        <!--<swagger2markup.extensions.springRestDocs.snippetBaseUri>${swagger.base.path}</swagger2markup.extensions.springRestDocs.snippetBaseUri>-->
+                        <!--<swagger2markup.extensions.springRestDocs.defaultSnippets>true</swagger2markup.extensions.springRestDocs.defaultSnippets>-->
+                    </config>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>convertSwagger2markup</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- 下面和spring-restdocs相同 -->
+            <!-- 将ascii片段生成html或pdf -->
+            <!-- 默认生成路径 target/generated-docs -->
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <version>1.5.3</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctorj-pdf</artifactId>
+                        <version>1.5.0-alpha.11</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jruby</groupId>
+                        <artifactId>jruby-complete</artifactId>
+                        <version>1.7.21</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <!--<sourceDirectory>${swagger.base.path}</sourceDirectory>-->
+                    <!-- 默认录 src/main/asciidoc -->
+                    <sourceDocumentName>index.adoc</sourceDocumentName>
+                    <attributes>
+                        <doctype>book</doctype>
+                        <toc>left</toc>
+                        <toclevels>3</toclevels>
+                        <numbered></numbered>
+                        <hardbreaks></hardbreaks>
+                        <sectlinks></sectlinks>
+                        <sectanchors></sectanchors>
+                        <!-- index.adoc中的变量 -->
+                        <generated>${asciidoctor.output.directory}</generated>
+                    </attributes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-html</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <backend>html5</backend>
+                            <!--<outputDirectory>${swagger.base.path}/html</outputDirectory>-->
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>generate-pdf</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <backend>pdf</backend>
+                            <!--<outputDirectory>${swagger.base.path}/pdf</outputDirectory>-->
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

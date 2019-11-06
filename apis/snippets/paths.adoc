@@ -1,0 +1,417 @@
+
+[[_paths]]
+== Paths
+
+[[_errorhtmlusingpost]]
+=== errorHtml
+....
+POST /error
+....
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_modelandview,ModelAndView>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `text/html`
+
+
+==== Tags
+
+* basic-error-controller
+
+
+[[_errorhtmlusingget]]
+=== errorHtml
+....
+GET /error
+....
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_modelandview,ModelAndView>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `text/html`
+
+
+==== Tags
+
+* basic-error-controller
+
+
+[[_errorhtmlusingput]]
+=== errorHtml
+....
+PUT /error
+....
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_modelandview,ModelAndView>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `text/html`
+
+
+==== Tags
+
+* basic-error-controller
+
+
+[[_errorhtmlusingdelete]]
+=== errorHtml
+....
+DELETE /error
+....
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_modelandview,ModelAndView>>
+|**204**|No Content|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|===
+
+
+==== Produces
+
+* `text/html`
+
+
+==== Tags
+
+* basic-error-controller
+
+
+[[_errorhtmlusingpatch]]
+=== errorHtml
+....
+PATCH /error
+....
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_modelandview,ModelAndView>>
+|**204**|No Content|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `text/html`
+
+
+==== Tags
+
+* basic-error-controller
+
+
+[[_errorhtmlusinghead]]
+=== errorHtml
+....
+HEAD /error
+....
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_modelandview,ModelAndView>>
+|**204**|No Content|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `text/html`
+
+
+==== Tags
+
+* basic-error-controller
+
+
+[[_errorhtmlusingoptions]]
+=== errorHtml
+....
+OPTIONS /error
+....
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_modelandview,ModelAndView>>
+|**204**|No Content|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `text/html`
+
+
+==== Tags
+
+* basic-error-controller
+
+
+[[_saveuserusingpost]]
+=== 新增用户
+....
+POST /user
+....
+
+
+==== Description
+新增用户
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**user** +
+__required__|用户|<<_user,User>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_user,User>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* UserController
+
+
+[[_getusersusingget]]
+=== 查询用户
+....
+GET /user
+....
+
+
+==== Description
+根据条件查询用户
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Query**|**age** +
+__optional__|age|integer (int32)
+|**Query**|**userCaption** +
+__optional__|userCaption|string
+|**Query**|**userName** +
+__optional__|userName|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|< <<_user,User>> > array
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* UserController
+
+
+[[_getuserusingget]]
+=== 查询用户
+....
+GET /user/{id}
+....
+
+
+==== Description
+根据id查询用户
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**id** +
+__required__|用户id|integer (int64)
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_user,User>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* UserController
+
+
+[[_deleteuserusingdelete]]
+=== 删除用户
+....
+DELETE /user/{id}
+....
+
+
+==== Description
+根据id删除用户
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**id** +
+__required__|用户id|integer (int64)
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|boolean
+|**204**|No Content|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|===
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* UserController
+
+
+
